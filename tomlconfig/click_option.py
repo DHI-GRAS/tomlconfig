@@ -1,15 +1,12 @@
 
 
-def toml_config_option(keys=None, configkey='__config', **clickkwargs):
+def toml_config_option(keys=None, **clickkwargs):
     """Generate TOML config file option for click
 
     Parameters
     ----------
     keys : list of str
         top-level keys that are required to be in TOML config
-    configkey : str
-        key for config dict for internal use
-        should not be in keys
     **clickkwargs : additional keyword arguments
         passed to click.option
         e.g. `required` or `help`
@@ -21,6 +18,8 @@ def toml_config_option(keys=None, configkey='__config', **clickkwargs):
     import functools
     import click
     from .click_type import TOMLConfig
+
+    configkey = '__config'
 
     tomltype = TOMLConfig(required_keys=keys)
 
