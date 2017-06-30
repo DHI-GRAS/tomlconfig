@@ -1,10 +1,14 @@
 
 
-def toml_config_option(keys=None, **clickkwargs):
+def toml_config_option(
+        shortflag='-c', longflag='--config',
+        keys=None, **clickkwargs):
     """Generate TOML config file option for click
 
     Parameters
     ----------
+    shortflag, longflag : str
+        flag names
     keys : list of str
         top-level keys that are required to be in TOML config
     **clickkwargs : additional keyword arguments
@@ -25,7 +29,7 @@ def toml_config_option(keys=None, **clickkwargs):
 
     kw = dict(required=True, help='Config TOML file')
     kw.update(clickkwargs)
-    toml_option = click.option('--config', '-c', configkey, type=tomltype, **kw)
+    toml_option = click.option(longflag, shortflag, configkey, type=tomltype, **kw)
 
     def wrap_maker(f):
 
